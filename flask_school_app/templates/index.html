@@ -1,0 +1,42 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for  message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif%}
+{% endwith %}
+
+<form action="/add_profesor" method="POST">
+
+<input type="text" name="fullname" placeholder="Fullname" required>
+<input type="text" name="classroom" placeholder="classroom" required>
+<input type="text" name="materia" placeholder="materia" required>
+<button type="submit">
+    save
+</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+        <th>fullname</th>
+        <th>classroom</th>
+        <th>materia</th>
+        <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for profesor in profesores %}
+        <tr>
+            <td>{{ profesor[1] }}</td>
+            <td>{{ profesor[2] }}</td>   
+            <td>{{ profesor[3] }}</td>  
+            <td>
+                <a href="/edit/{{ profesor [0] }}">Edit</a>
+                <a href="/delete/ {{ profesor [0] }}"
+                onclick="return confirm('Seguro que deseas eliminar')">Delete</a>
+            </td>  
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
